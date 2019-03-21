@@ -22,12 +22,20 @@ public class ListDepanneur extends AppCompatActivity {
     private RecyclerView RecycleLayout;
     private RecyclerView.LayoutManager RecycleManager;
     private RecyclerView.Adapter depanneurAdapter;
-    String idClient;
+    String idClient,btnClicked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_depanneur);
         RecycleLayout = findViewById(R.id.recyclerview);
+        Bundle data = getIntent().getExtras();
+
+        if (data != null) {
+            idClient = data.getString("idClient");
+            btnClicked = data.getString("btnClicked");
+
+        }
+
         ApiRequest api = RetrofitService.getClient().create(ApiRequest.class);
         Call<ResponseDataModel> getDepanneurs=api.getDepanneurs();
 
@@ -41,7 +49,7 @@ public class ListDepanneur extends AppCompatActivity {
 
                     RecycleLayout.setLayoutManager(RecycleManager);
 
-                    depanneurAdapter = new DepanneurAdapter(item, ListDepanneur.this);
+                    depanneurAdapter = new DepanneurAdapter(item, ListDepanneur.this,btnClicked,idClient);
 
                     RecycleLayout.setAdapter(depanneurAdapter);
                 }

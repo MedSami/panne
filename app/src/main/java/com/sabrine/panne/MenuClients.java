@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MenuClients extends AppCompatActivity {
 Button btnGererProfil,btnListDepanneur,btnChercherDepanneur,btnEnvoyerMsg;
+String idClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,11 +18,27 @@ Button btnGererProfil,btnListDepanneur,btnChercherDepanneur,btnEnvoyerMsg;
         btnGererProfil=findViewById(R.id.btnGererProfile);
         btnListDepanneur=findViewById(R.id.btnConsulterDepanneur);
         btnEnvoyerMsg=findViewById(R.id.btnEnvoyerMsg);
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            idClient = data.getString("idClient");
 
+        }
         btnListDepanneur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MenuClients.this,ListDepanneur.class);
+                intent.putExtra("idClient",idClient);
+                intent.putExtra("btnClicked","list");
+                startActivity(intent);
+            }
+        });
+
+        btnEnvoyerMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MenuClients.this,ListDepanneur.class);
+                intent.putExtra("idClient",idClient);
+                intent.putExtra("btnClicked","msg");
                 startActivity(intent);
             }
         });

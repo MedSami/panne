@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sabrine.panne.EnvoyerMsg;
 import com.sabrine.panne.R;
 import com.sabrine.panne.model.DataModel;
 
@@ -19,9 +20,12 @@ public class DepanneurAdapter extends RecyclerView.Adapter<DepanneurAdapter.Acto
 
     List<DataModel> items;
     private Context ctx;
-    public DepanneurAdapter(List<DataModel> items, Context ctx) {
+    String btnClicked,idClient;
+    public DepanneurAdapter(List<DataModel> items, Context ctx,String btnClicked,String idClient) {
         this.items = items;
         this.ctx=ctx;
+        this.btnClicked=btnClicked;
+        this.idClient=idClient;
 
     }
 
@@ -60,11 +64,12 @@ public class DepanneurAdapter extends RecyclerView.Adapter<DepanneurAdapter.Acto
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-/*
-                    Uri gmmIntentUri = Uri.parse("google.streetview:cbll="+dm.getLatitude()+","+dm.getLongitude());
-                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                    mapIntent.setPackage("com.google.android.apps.maps");
-                    ctx.startActivity(mapIntent);*/
+                    if(btnClicked.equals("msg")){
+                        Intent i=new Intent(ctx, EnvoyerMsg.class);
+                        i.putExtra("idClient",idClient);
+                        i.putExtra("idDepanneur",dm.getId());
+                        ctx.startActivity(i);
+                    }
 
 
                 }
