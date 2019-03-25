@@ -29,4 +29,14 @@ public interface ApiRequest {
             @Field("msg") String msg
     );
 
+    /******************** Authentification Login*******************/
+    @GET("getMessages.php")
+    Call<ResponseDataModel> getMessages(@Query("idDepanneur") String idDepanneur);
+    /*************** Envoyer Reponse  *******************/
+
+    @GET("reponseMessage.php")
+    Call<ResponseDataModel> reponse(
+            @Query("id") String id,
+            @Query("reponse") String reponse
+    );
 }
