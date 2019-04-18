@@ -37,7 +37,7 @@ String NomPrenom,message,idMessage;
             NomPrenom = data.getString("nom");
             txtnomprenom.setText(NomPrenom);
             txtmsg.setText(message);
-            Toast.makeText(this, idMessage, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, idMessage, Toast.LENGTH_SHORT).show();
         }
 
         btnReponse.setOnClickListener(new View.OnClickListener() {

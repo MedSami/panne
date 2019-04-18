@@ -75,7 +75,6 @@ int index;
             }
         });
 
-        Toast.makeText(this, ""+index, Toast.LENGTH_SHORT).show();
         btnEntrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +103,7 @@ int index;
                                             if (index == 1) {
 
                                                 Intent intent = new Intent(MainActivity.this, MenuDepanneur.class);
-                                                intent.putExtra("idDepanneur", "" + response.body().getResult().get(0).getId());
+                                                intent.putExtra("idClient", "" + response.body().getResult().get(0).getId());
                                                 startActivity(intent);
                                             }
 
@@ -114,15 +113,15 @@ int index;
                                         }
                                     } else {
 
-                                        Toast.makeText(MainActivity.this, "Identifiant Incorrect", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "Identifiant Incorrect1", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }else {
-                                    Toast.makeText(MainActivity.this, "Identifiant Incorrect", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Identifiant Incorrect2", Toast.LENGTH_SHORT).show();
 
                                 }
                             }else {
-                                Toast.makeText(MainActivity.this, "Identifiant Incorrect", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Identifiant Incorrect3", Toast.LENGTH_SHORT).show();
                             }
                         }
 

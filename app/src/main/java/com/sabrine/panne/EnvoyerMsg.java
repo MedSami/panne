@@ -30,7 +30,7 @@ Button btnEnvoyer;
 
         if (data != null) {
             idClient = data.getString("idClient");
-            idDepanneur = data.getString("idDepanneur");
+            idDepanneur = data.getString("idClient");
         }
 
         btnEnvoyer.setOnClickListener(new View.OnClickListener() {

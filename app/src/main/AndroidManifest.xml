@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ConsulterMessage"></activity>
+        <activity android:name=".Reponse"></activity>
+        <activity android:name=".ListReponse" />
+        <activity android:name=".ConsulterMessage" />
         <activity android:name=".ListMsg" />
         <activity android:name=".EnvoyerMsg" />
         <activity android:name=".ListDepanneur" />

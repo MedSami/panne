@@ -7,15 +7,14 @@ import android.view.View;
 import android.widget.Button;
 
 public class MenuClients extends AppCompatActivity {
-Button btnGererProfil,btnListDepanneur,btnChercherDepanneur,btnEnvoyerMsg;
+Button btnReponse,btnListDepanneur,btnEnvoyerMsg;
 String idClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_clients);
 
-        btnChercherDepanneur=findViewById(R.id.btnChercherDepanneur);
-        btnGererProfil=findViewById(R.id.btnGererProfile);
+        btnReponse=findViewById(R.id.btnReponse);
         btnListDepanneur=findViewById(R.id.btnConsulterDepanneur);
         btnEnvoyerMsg=findViewById(R.id.btnEnvoyerMsg);
         Bundle data = getIntent().getExtras();
@@ -37,6 +36,15 @@ String idClient;
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MenuClients.this,ListDepanneur.class);
+                intent.putExtra("idClient",idClient);
+                intent.putExtra("btnClicked","msg");
+                startActivity(intent);
+            }
+        });
+        btnReponse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MenuClients.this,ListReponse.class);
                 intent.putExtra("idClient",idClient);
                 intent.putExtra("btnClicked","msg");
                 startActivity(intent);

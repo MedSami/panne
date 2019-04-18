@@ -1,13 +1,14 @@
 package com.sabrine.panne.model;
 
 public class DataModel {
-    String id, nom, prenom, numTel, identifiant, motDePasse,specialite,adresse,message;
+    String id, nom, prenom,reponse, numTel, identifiant, motDePasse,specialite,adresse,message;
 
-    public DataModel(String id,String message, String nom, String prenom, String numTel, String identifiant, String motDePasse, String specialite, String adresse) {
+    public DataModel(String id,String message,String reponse, String nom, String prenom, String numTel, String identifiant, String motDePasse, String specialite, String adresse) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.numTel = numTel;
+        this.reponse=reponse;
         this.message=message;
         this.identifiant = identifiant;
         this.motDePasse = motDePasse;
@@ -17,6 +18,10 @@ public class DataModel {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getReponse() {
+        return reponse;
     }
 
     public String getId() {

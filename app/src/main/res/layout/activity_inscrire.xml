@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inscrire">
+    tools:context=".Inscrire"
+    android:background="@drawable/gradient_background">
 
     <EditText
         android:id="@+id/edtNom"
@@ -100,7 +101,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtPassword">
 
         <RadioButton
-            android:id="@+id/rdbPublic"
+            android:id="@+id/rdbClient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -108,7 +109,7 @@
             android:text="Client" />
 
         <RadioButton
-            android:id="@+id/rdbAbonne"
+            android:id="@+id/rdbDepanneur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -134,7 +135,23 @@
         app:layout_constraintTop_toBottomOf="@+id/rdbUtilisateur" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:visibility="gone"
+        android:hint="Specialiter"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtAdresse" />
+
+    <Button
+        android:id="@+id/btnInscrire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -142,8 +159,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:visibility="gone"
+        android:text="Inscrire"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAdresse" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 </android.support.constraint.ConstraintLayout>

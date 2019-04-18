@@ -6,8 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.sabrine.panne.Adapter.DepanneurAdapter;
 import com.sabrine.panne.Adapter.MsgAdapter;
+import com.sabrine.panne.Adapter.ReponseAdapter;
 import com.sabrine.panne.Api.ApiRequest;
 import com.sabrine.panne.Api.RetrofitService;
 import com.sabrine.panne.model.DataModel;
@@ -19,45 +19,45 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListMsg extends AppCompatActivity {
+public class ListReponse extends AppCompatActivity {
     private RecyclerView RecycleLayout;
     private RecyclerView.LayoutManager RecycleManager;
-    private RecyclerView.Adapter msgAdapter;
-    String idDepanneur;
+    private RecyclerView.Adapter reponseAdapter;
+    String idClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_msg);
+        setContentView(R.layout.activity_list_reponse);
+
         RecycleLayout = findViewById(R.id.recyclerview);
         Bundle data = getIntent().getExtras();
 
         if (data != null) {
-            idDepanneur= data.getString("idClient");
+            idClient = data.getString("idClient");
 
         }
         ApiRequest api = RetrofitService.getClient().create(ApiRequest.class);
-        Call<ResponseDataModel> getMessages=api.getMessages(idDepanneur);
-        getMessages.enqueue(new Callback<ResponseDataModel>() {
+        Call<ResponseDataModel> getReponse=api.getResponse(idClient);
+        getReponse.enqueue(new Callback<ResponseDataModel>() {
             @Override
             public void onResponse(Call<ResponseDataModel> call, Response<ResponseDataModel> response) {
                 String code = response.body().getCode();
                 List<DataModel> item = response.body().getResult();
                 if (code.equals("1")) {
-                    RecycleManager = new LinearLayoutManager(ListMsg.this, LinearLayoutManager.VERTICAL, false);
+                    RecycleManager = new LinearLayoutManager(ListReponse.this, LinearLayoutManager.VERTICAL, false);
 
                     RecycleLayout.setLayoutManager(RecycleManager);
 
-                    msgAdapter = new MsgAdapter(item, ListMsg.this);
+                    reponseAdapter = new ReponseAdapter(item, ListReponse.this);
 
-                    RecycleLayout.setAdapter(msgAdapter);
+                    RecycleLayout.setAdapter(reponseAdapter);
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseDataModel> call, Throwable t) {
-                Toast.makeText(ListMsg.this, "Problem Connexion", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListReponse.this, "Problem Connexion", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }

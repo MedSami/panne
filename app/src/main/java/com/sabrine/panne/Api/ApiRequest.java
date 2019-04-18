@@ -29,9 +29,25 @@ public interface ApiRequest {
             @Field("msg") String msg
     );
 
-    /******************** Authentification Login*******************/
+    /*************** Inscrire  *******************/
+    @FormUrlEncoded
+    @POST("Inscrire.php")
+    Call<ResponseDataModel> Inscrire(
+            @Field("type") String type,
+            @Field("nom") String nom,
+            @Field("prenom") String prenom,
+            @Field("numTel") String numTel,
+            @Field("identifiant") String Identifiant,
+            @Field("specialite") String specialite,
+            @Field("adresse") String adresse,
+            @Field("motdepasse") String motdepasse
+    );
+    /******************** Messages*******************/
     @GET("getMessages.php")
     Call<ResponseDataModel> getMessages(@Query("idDepanneur") String idDepanneur);
+    /******************** Messages*******************/
+    @GET("getReponse.php")
+    Call<ResponseDataModel> getResponse(@Query("idClient") String idClient);
     /*************** Envoyer Reponse  *******************/
 
     @GET("reponseMessage.php")
