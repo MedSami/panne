@@ -22,50 +22,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class MainActivity extends AppCompatActivity {
 EditText edtIdentifiant,edtPassword;
 Button btnEntrer,btnInscrire;
-
-int index;
+    private SharedPrefsActivity sessionManager;
+    int index;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         edtIdentifiant=findViewById(R.id.edtIdentifiant);
         edtPassword=findViewById(R.id.edtPassword);
         btnEntrer=findViewById(R.id.btnEntrer);
         btnInscrire=findViewById(R.id.btnInscrire);
+        sessionManager = new SharedPrefsActivity(getApplicationContext());
 
-        // Spinner element
-        Spinner spinner =  findViewById(R.id.spinner);
+        if (sessionManager.isUserLogin()) {
+            Intent i = new Intent(this, MenuClients.class);
+            i.putExtra("idClient",sessionManager.getSavedUserID());
+            startActivity(i);
+            finish();
+        }
 
-
-        // Spinner Drop down elements
-        List<String> utilisateurs = new ArrayList<String>();
-        utilisateurs.add("Client");
-        utilisateurs.add("Depanneur");
-
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, utilisateurs);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                index= position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         btnInscrire.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,18 +73,14 @@ int index;
                                     if (response.body().getResult().get(0).getIdentifiant().equals(edtIdentifiant.getText().toString())) {
                                         if (response.body().getResult().get(0).getMotDePasse().equals(edtPassword.getText().toString())) {
 
-                                            if (index == 0) {
+                                            sessionManager.setUserLoggedIn(true);
+                                            sessionManager.setSavedIdName( response.body().getResult().get(0).getId());
 
                                                 Intent intent = new Intent(MainActivity.this, MenuClients.class);
                                                 intent.putExtra("idClient", "" + response.body().getResult().get(0).getId());
                                                 startActivity(intent);
-                                            }
-                                            if (index == 1) {
+                                            finish();
 
-                                                Intent intent = new Intent(MainActivity.this, MenuDepanneur.class);
-                                                intent.putExtra("idClient", "" + response.body().getResult().get(0).getId());
-                                                startActivity(intent);
-                                            }
 
 
                                         } else {
@@ -113,21 +88,21 @@ int index;
                                         }
                                     } else {
 
-                                        Toast.makeText(MainActivity.this, "Identifiant Incorrect1", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "Identifiant Incorrect", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }else {
-                                    Toast.makeText(MainActivity.this, "Identifiant Incorrect2", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Identifiant Incorrect", Toast.LENGTH_SHORT).show();
 
                                 }
                             }else {
-                                Toast.makeText(MainActivity.this, "Identifiant Incorrect3", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Identifiant Incorrect", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ResponseDataModel> call, Throwable t) {
-                            Toast.makeText(MainActivity.this, "Problem Connexion", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -135,4 +110,6 @@ int index;
             }
         });
     }
+
+
 }

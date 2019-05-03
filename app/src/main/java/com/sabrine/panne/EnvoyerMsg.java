@@ -23,6 +23,7 @@ Button btnEnvoyer;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_envoyer_msg);
+
         edtMsg=findViewById(R.id.edtMsg);
         btnEnvoyer=findViewById(R.id.btnEnvoyer);
 
@@ -37,7 +38,7 @@ Button btnEnvoyer;
             @Override
             public void onClick(View view) {
                 if(edtMsg.getText().toString().equals("")){
-                    Toast.makeText(EnvoyerMsg.this, "Remplir Chammp Message ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EnvoyerMsg.this, "Remplir Champ Message ", Toast.LENGTH_SHORT).show();
                 }else {
                     ApiRequest api = RetrofitService.getClient().create(ApiRequest.class);
                     Call<ResponseDataModel> envoyerMsg=api.EnvoyerMsg(idClient,idDepanneur,edtMsg.getText().toString());
@@ -50,7 +51,7 @@ Button btnEnvoyer;
 
                         @Override
                         public void onFailure(Call<ResponseDataModel> call, Throwable t) {
-                            Toast.makeText(EnvoyerMsg.this, "Problem Connexion", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EnvoyerMsg.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 

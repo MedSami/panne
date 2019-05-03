@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.sabrine.panne.Adapter.MsgAdapter;
 import com.sabrine.panne.Adapter.ReponseAdapter;
 import com.sabrine.panne.Api.ApiRequest;
 import com.sabrine.panne.Api.RetrofitService;
@@ -30,12 +29,13 @@ public class ListReponse extends AppCompatActivity {
         setContentView(R.layout.activity_list_reponse);
 
         RecycleLayout = findViewById(R.id.recyclerview);
+
         Bundle data = getIntent().getExtras();
 
         if (data != null) {
             idClient = data.getString("idClient");
-
         }
+
         ApiRequest api = RetrofitService.getClient().create(ApiRequest.class);
         Call<ResponseDataModel> getReponse=api.getResponse(idClient);
         getReponse.enqueue(new Callback<ResponseDataModel>() {
@@ -48,7 +48,7 @@ public class ListReponse extends AppCompatActivity {
 
                     RecycleLayout.setLayoutManager(RecycleManager);
 
-                    reponseAdapter = new ReponseAdapter(item, ListReponse.this);
+                    reponseAdapter = new ReponseAdapter(item, ListReponse.this,idClient);
 
                     RecycleLayout.setAdapter(reponseAdapter);
                 }
@@ -56,7 +56,7 @@ public class ListReponse extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseDataModel> call, Throwable t) {
-                Toast.makeText(ListReponse.this, "Problem Connexion", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListReponse.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

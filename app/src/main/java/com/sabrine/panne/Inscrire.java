@@ -23,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Inscrire extends AppCompatActivity {
-    String adr="",spec="",client="0",depanneur="0",type="0";
+    String adr="",spec="",type="0";
     RadioButton c,d;
     EditText edtNom,edtPrenom,edtNumTel,edtIdentifiant,edtPassword,edtAdresse;
     Spinner spinner;
@@ -62,6 +62,7 @@ public class Inscrire extends AppCompatActivity {
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -111,7 +112,7 @@ public class Inscrire extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResponseDataModel> call, Throwable t) {
-                        Toast.makeText(Inscrire.this, "Problem Connexion", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Inscrire.this, "f : "+t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

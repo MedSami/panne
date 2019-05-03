@@ -13,11 +13,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Reponse"></activity>
         <activity android:name=".ListReponse" />
-        <activity android:name=".ConsulterMessage" />
-        <activity android:name=".ListMsg" />
         <activity android:name=".EnvoyerMsg" />
         <activity android:name=".ListDepanneur" />
-        <activity android:name=".MenuDepanneur" />
         <activity android:name=".Inscrire" />
         <activity android:name=".MenuClients" />
         <activity android:name=".MainActivity">

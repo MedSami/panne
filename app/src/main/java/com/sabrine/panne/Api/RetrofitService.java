@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.security.cert.CertificateException;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -18,8 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
 
-    private static final String Base_Url="http://10.0.3.2/Panne/";
-    //private static final String Base_Url="https://panne2019.000webhostapp.com/Panne/";
+    //private static final String Base_Url="http://10.0.3.2/Panne/";
+    private static final String Base_Url="https://panne2019.000webhostapp.com/Panne/";
     private static Retrofit retrofit;
     public static OkHttpClient.Builder getUnsafeOkHttpClient() {
         try {
@@ -64,12 +65,18 @@ public class RetrofitService {
 
 
     public static Retrofit getClient(){
+        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(360, TimeUnit.SECONDS)
+                .connectTimeout(360, TimeUnit.SECONDS)
+                .build();
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
+
         if (retrofit==null){
             retrofit=new Retrofit.Builder().client(getUnsafeOkHttpClient().build())
-                    .baseUrl(Base_Url).addConverterFactory(GsonConverterFactory.create(gson)).build();
+                    .baseUrl(Base_Url).addConverterFactory(GsonConverterFactory.create(gson)).
+                            client(okHttpClient).build();
         }
         return retrofit;
     }

@@ -28,6 +28,7 @@ public class ListDepanneur extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_depanneur);
         RecycleLayout = findViewById(R.id.recyclerview);
+
         Bundle data = getIntent().getExtras();
 
         if (data != null) {
@@ -49,7 +50,7 @@ public class ListDepanneur extends AppCompatActivity {
 
                     RecycleLayout.setLayoutManager(RecycleManager);
 
-                    depanneurAdapter = new DepanneurAdapter(item, ListDepanneur.this,btnClicked,idClient);
+                    depanneurAdapter = new DepanneurAdapter(item, ListDepanneur.this,idClient);
 
                     RecycleLayout.setAdapter(depanneurAdapter);
                 }
@@ -57,7 +58,7 @@ public class ListDepanneur extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseDataModel> call, Throwable t) {
-                Toast.makeText(ListDepanneur.this, "Problem Connexion", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListDepanneur.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

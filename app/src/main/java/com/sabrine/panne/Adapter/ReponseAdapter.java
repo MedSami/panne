@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.sabrine.panne.ConsulterMessage;
 import com.sabrine.panne.R;
 import com.sabrine.panne.Reponse;
 import com.sabrine.panne.model.DataModel;
@@ -21,11 +19,12 @@ public class ReponseAdapter extends RecyclerView.Adapter<ReponseAdapter.ActorVie
 
     List<DataModel> items;
     private Context ctx;
+String idClient;
 
-    public ReponseAdapter(List<DataModel> items, Context ctx) {
+public ReponseAdapter(List<DataModel> items, Context ctx,String idClient) {
         this.items = items;
         this.ctx=ctx;
-
+        this.idClient=idClient;
 
     }
 
@@ -63,11 +62,14 @@ public class ReponseAdapter extends RecyclerView.Adapter<ReponseAdapter.ActorVie
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i=new Intent(ctx, Reponse.class);
-                    i.putExtra("rep",dm.getReponse());
-                    i.putExtra("msg",dm.getMessage());
-                    ctx.startActivity(i);}
-            });
+
+                        Intent i = new Intent(ctx, Reponse.class);
+                        i.putExtra("rep", dm.getReponse());
+                        i.putExtra("idClient", idClient);
+                        i.putExtra("msg", dm.getMessage());
+                        ctx.startActivity(i);
+
+                }});
 
         }
     }

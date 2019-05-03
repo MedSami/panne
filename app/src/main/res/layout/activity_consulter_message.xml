@@ -11,7 +11,7 @@
         android:id="@+id/txtNomPrenom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="124dp"
+        android:layout_marginBottom="100dp"
         android:text="Nom Prenom"
         android:textSize="24sp"
         android:textColor="@color/colorAccent"

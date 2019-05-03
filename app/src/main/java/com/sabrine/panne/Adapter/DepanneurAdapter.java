@@ -20,11 +20,10 @@ public class DepanneurAdapter extends RecyclerView.Adapter<DepanneurAdapter.Acto
 
     List<DataModel> items;
     private Context ctx;
-    String btnClicked,idClient;
-    public DepanneurAdapter(List<DataModel> items, Context ctx,String btnClicked,String idClient) {
+    String idClient;
+    public DepanneurAdapter(List<DataModel> items, Context ctx,String idClient) {
         this.items = items;
         this.ctx=ctx;
-        this.btnClicked=btnClicked;
         this.idClient=idClient;
 
     }
@@ -64,12 +63,12 @@ public class DepanneurAdapter extends RecyclerView.Adapter<DepanneurAdapter.Acto
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(btnClicked.equals("msg")){
+
                         Intent i=new Intent(ctx, EnvoyerMsg.class);
                         i.putExtra("idClient",idClient);
                         i.putExtra("idDepanneur",dm.getId());
                         ctx.startActivity(i);
-                    }
+
 
 
                 }
